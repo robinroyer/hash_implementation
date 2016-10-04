@@ -5,17 +5,21 @@ import java.util.Random;
 
 public class QuadraticSpacePerfectHashing<AnyType> 
 {
-	static int p = 46337;
+	private final static int p = 46337;
 
-	int a;
-        int b;
-        int m;
-	AnyType[] items;
+        private static final int KEY_NOT_PRESENT = -1;
+        
+	private int a;
+        private int b;
+        private int m;
+	private AnyType[] items;
 
+        
+        // TODO specifier le Guide de Style
 	QuadraticSpacePerfectHashing()
 	{
-		a=0;
-                b=0;
+		a = 0;
+                b = 0;
                 items = null;
 	}
 
@@ -38,7 +42,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-                if(items == null || key == -1){
+                if(items == null || key == KEY_NOT_PRESENT){
                     return false;
                 }
                 
@@ -54,11 +58,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                     return false;
                 }
                 
-                if(items[(((a * x.hashCode() + b) % p) % m)] != null){
-                        return true;
-                }
-                return false;
-
+                return items[(((a * x.hashCode() + b) % p) % m)] != null;
 	}
 
 	public void remove (AnyType x) {
@@ -69,7 +69,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		int tmp = ((a * x.hashCode() + b) % p) % m;
 		if( items[tmp] == x){
                         items[tmp] = null;
-                        return;
                 }
                 else{
                         // TODO: maybe we should throw a custom exception here
@@ -79,7 +78,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	public int getKey (AnyType x) {
             
                 if(items == null){
-                        return -1;
+                        return KEY_NOT_PRESENT;
                 }
             
 		int tmp = ((a * x.hashCode() + b) % p) % m;
@@ -88,7 +87,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                 }
                 
                 // TODO: maybe we should throw a custom exception here
-                return -1;
+                return KEY_NOT_PRESENT;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -149,6 +148,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		return false;
 	}
 	
+        @Override
 	public String toString () {
 		String result = "";
                 
