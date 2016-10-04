@@ -7,12 +7,16 @@ public class QuadraticSpacePerfectHashing<AnyType>
 {
 	static int p = 46337;
 
-	int a, b;
+	int a;
+        int b;
+        int m;
 	AnyType[] items;
 
 	QuadraticSpacePerfectHashing()
 	{
-		a=b=0; items = null;
+		a=0;
+                b=0;
+                items = null;
 	}
 
 	QuadraticSpacePerfectHashing(ArrayList<AnyType> array)
@@ -34,24 +38,57 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-		// A completer
-
+                if(items == null){
+                    return false;
+                }
+                
+                if(items[key] != null){
+                        return true;
+                }
+                return false;
 	}
 
 	public boolean containsValue(AnyType x )
 	{
-		// A completer
+		if(items == null){
+                    return false;
+                }
+                
+                if(items[(((a * x.hashCode() + b) % p) % m)] != null){
+                        return true;
+                }
+                return false;
 
 	}
 
 	public void remove (AnyType x) {
-		// A completer
-
+                if(items == null){
+                        return;
+                }
+            
+		int tmp = ((a * x.hashCode() + b) % p) % m;
+		if( items[tmp] == x){
+                        items[tmp] = null;
+                        return;
+                }
+                else{
+                        // TODO: maybe we should throw a custom exception here
+                }
 	}
 
 	public int getKey (AnyType x) {
-		// A completer
-		
+            
+                if(items == null){
+                        return -1;
+                }
+            
+		int tmp = ((a * x.hashCode() + b) % p) % m;
+		if( items[tmp] == x){
+                        return tmp;
+                }
+                
+                // TODO: maybe we should throw a custom exception here
+                return -1;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,43 +96,67 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	{
 		Random generator = new Random( System.nanoTime() );
 
-		if(array == null || array.size() == 0)
+		if(array == null || array.isEmpty())
 		{
-			// A completer
+			items = (AnyType[]) new Object[0];
 			return;
 		}
 		if(array.size() == 1)
 		{
 			a = b = 0;
 
-			// A completer			
+                        items = (AnyType[]) new Object[1];
+                        items[0] = array.get(0);
 			return;
 		}
 
 		do
 		{
-			items = null;
-
-			// A completer
-
-		}
+                        a = (int) (Math.random() * p);                                               
+                        b = (int) (Math.random() * p);
+                        m = array.size() * array.size();
+			items = (AnyType[]) new Object[m];
+                        int tmp;
+                        
+                    for (AnyType array1 : array) {
+                        tmp = ((a * array1.hashCode() + b) % p) % m;
+                        items[tmp] = array1;
+                    }
+			
+                }
 		while( collisionExists( array ) );
 	}
 
 	@SuppressWarnings("unchecked")
 	private boolean collisionExists(ArrayList<AnyType> array)
 	{
-		// A completer
+            
+                int tmp1;
+                int tmp2;
+                
+                // On compare chaque item avec chaque autre item une fois O(nLog(n))
+                for (int i = 0; i < array.size() - 1; i++) {                           
+                        tmp1 = ((a * array.get(i).hashCode() + b) % p) % m;
+                        for (int j = i + 1; j < array.size(); j++) {
+                                tmp2 = ((a * array.get(j).hashCode() + b) % p) % m;
+                                if (tmp1 == tmp2){
+                                        return true;
+                                }
+                        }
+                    
+                }
 
 		return false;
 	}
 	
 	public String toString () {
 		String result = "";
-		
-		// A completer
-		
-		
+                
+		for (int i = 0; i < items.length; i++) {
+                        if( (((a * items[i].hashCode() + b) % p) % m) == i){
+                                result += "(" + i + ", "+ items[i] +"),";
+                        }
+                }				
 		return result; 
 	}
 }
