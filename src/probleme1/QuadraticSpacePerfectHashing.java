@@ -38,7 +38,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-                if(items == null){
+                if(items == null || key == -1){
                     return false;
                 }
                 
@@ -153,9 +153,11 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		String result = "";
                 
 		for (int i = 0; i < items.length; i++) {
-                        if( (((a * items[i].hashCode() + b) % p) % m) == i){
+                    if (items[i] != null) {
+                            if( (((a * items[i].hashCode() + b) % p) % m) == i){
                                 result += "(" + i + ", "+ items[i] +"),";
                         }
+                    }      
                 }				
 		return result; 
 	}
