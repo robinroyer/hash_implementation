@@ -56,7 +56,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                     return false;
                 }
                 
-                return items[(((a * x.hashCode() + b) % p) % m)] != null;
+                return items[CustomHash(x)] != null;
 	}
 
 	public void remove (AnyType x) {
@@ -64,7 +64,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                         return;
                 }
             
-		int tmp = ((a * x.hashCode() + b) % p) % m;
+		int tmp = CustomHash(x);
 		if( items[tmp] == x){
                         items[tmp] = null;
                 }
@@ -105,33 +105,29 @@ public class QuadraticSpacePerfectHashing<AnyType>
                         int tmp;
                         
                     for (AnyType array1 : array) {
-                        tmp = ((a * array1.hashCode() + b) % p) % m;
-                        items[tmp] = array1;
-                    }
-			
+                            tmp = CustomHash(array1);
+                            items[tmp] = array1;
+                    }	
                 }
 		while( collisionExists( array ) );
 	}
 
 	@SuppressWarnings("unchecked")
 	private boolean collisionExists(ArrayList<AnyType> array)
-	{
-            
+	{            
                 int tmp1;
                 int tmp2;
                 
                 // On compare chaque item avec chaque autre item une fois O(nLog(n))
                 for (int i = 0; i < array.size() - 1; i++) {                           
-                        tmp1 = ((a * array.get(i).hashCode() + b) % p) % m;
+                        tmp1 = CustomHash(array.get(i));
                         for (int j = i + 1; j < array.size(); j++) {
-                                tmp2 = ((a * array.get(j).hashCode() + b) % p) % m;
+                                tmp2 = CustomHash(array.get(j));
                                 if (tmp1 == tmp2){
                                         return true;
                                 }
-                        }
-                    
+                        }                    
                 }
-
 		return false;
 	}
 	
@@ -141,11 +137,15 @@ public class QuadraticSpacePerfectHashing<AnyType>
                 
 		for (int i = 0; i < items.length; i++) {
                     if (items[i] != null) {
-                            if( (((a * items[i].hashCode() + b) % p) % m) == i){
+                            if( CustomHash(items[i]) == i){
                                 result += "(" + i + ", "+ items[i] +"),";
                         }
                     }      
                 }				
 		return result; 
 	}
+        
+        private int CustomHash(AnyType object){
+            return ((a * object.hashCode() + b) % p) % m;
+        }
 }
