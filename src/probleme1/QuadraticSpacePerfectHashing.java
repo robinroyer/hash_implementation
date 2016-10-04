@@ -6,8 +6,6 @@ import java.util.Random;
 public class QuadraticSpacePerfectHashing<AnyType> 
 {
 	private final static int p = 46337;
-
-        private static final int KEY_NOT_PRESENT = -1;
         
 	private int a;
         private int b;
@@ -42,7 +40,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-                if(items == null || key == KEY_NOT_PRESENT){
+                if(items == null){
                     return false;
                 }
                 
@@ -76,18 +74,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
 
 	public int getKey (AnyType x) {
-            
-                if(items == null){
-                        return KEY_NOT_PRESENT;
-                }
-            
-		int tmp = ((a * x.hashCode() + b) % p) % m;
-		if( items[tmp] == x){
-                        return tmp;
-                }
-                
-                // TODO: maybe we should throw a custom exception here
-                return KEY_NOT_PRESENT;
+		return ((a * x.hashCode() + b) % p) % m;
 	}
 
 	@SuppressWarnings("unchecked")
