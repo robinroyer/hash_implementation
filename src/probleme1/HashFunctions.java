@@ -108,7 +108,29 @@ public class HashFunctions
     */
    public static ArrayList<Integer> randomIntegers(int length)
    {
-      return null;
+	   ArrayList<Integer> array = new ArrayList<Integer>();
+	   boolean inIt = false;
+	   int i=0;
+	   
+	   do {
+		   inIt=false;
+		   //Random number between 0 and P
+		   int tmp = (int) (Math.random() * p);
+
+		   //Check if already in tab
+		   if(array.contains(tmp))
+				   inIt=true;
+
+		   //Put it if not and go to next case
+		   if(!inIt){
+			   array.add(tmp);
+			   i++;
+		   }
+		   
+	   }while(i!=length);
+	   
+	   return array;
+	   
    }
 }
 
