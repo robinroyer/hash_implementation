@@ -89,7 +89,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	public boolean containsKey(int key)
 	{
                 if((key < m) && (key >= 0)){
-                        return data[key] != null;
+                        return data[key].Size() != 0;
                 }        
                 return false;
 	}
@@ -101,7 +101,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	public boolean containsValue (AnyType x) {
             int key = CustomHash(x);
             
-            if ((key >= 0) && (key < m) && (data[key] != null)) {
+            if ((key >= 0) && (key < m) && (data[key].Size() != 0)) {
 		return data[key].containsValue(x);                
             }
             return false;
