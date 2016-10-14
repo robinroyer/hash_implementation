@@ -52,10 +52,9 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public boolean containsValue(AnyType x )
 	{
-		if(items == null){
+		if((items == null) || (m == 0) ){
                     return false;
-                }
-                
+                }     
                 return items[CustomHash(x)] != null;
 	}
 
@@ -74,6 +73,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
 
 	public int getKey (AnyType x) {
+                //TODO:refacto with private method
 		return ((a * x.hashCode() + b) % p) % m;
 	}
 
@@ -84,15 +84,15 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 		if(array == null || array.isEmpty())
 		{
-			items = (AnyType[]) new Object[0];
+			items = null;
 			return;
 		}
 		if(array.size() == 1)
 		{
 			a = b = 0;
-
+                        m = 1;
                         items = (AnyType[]) new Object[1];
-                        items[0] = array.get(0);
+                        items[0] = array.get(0);                        
 			return;
 		}
 
@@ -135,6 +135,11 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	public String toString () {
 		String result = "";
                 
+                // Avoid dividing by zero in CustomHash
+                if (items == null || m == 0) {
+                        return result;
+                }
+
 		for (int i = 0; i < items.length; i++) {
                     if (items[i] != null) {
                             if( CustomHash(items[i]) == i){
@@ -146,6 +151,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
         
         private int CustomHash(AnyType object){
-            return ((a * object.hashCode() + b) % p) % m;
+                return ((a * object.hashCode() + b) % p) % m;
         }
 }

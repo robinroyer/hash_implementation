@@ -57,37 +57,37 @@ public class HashFunctions
       /**
        * Exercice 2
        */
-      // On cree un LinearSpacePerfectHashing et insere les memes donnees
-//      System.out.println( "LinearSpacePerfectHashing:");
-//      System.out.println();
-//      
-//      LinearSpacePerfectHashing<Integer> pfhash = new LinearSpacePerfectHashing<Integer>( al );
-//      
-//      // Verifie les proprietes d'occupation d'espace
-//      System.out.println( "Number of elements: " + al.size() );
-//      System.out.println( "Size: " + pfhash.Size() );
-//      System.out.println();
-//      
-//      // Verifie qu'il fonctionne comme prevu
-//      System.out.println( 100 + " est present: " + pfhash.containsValue(100) );
-//      System.out.println(  99 + " est present: " + pfhash.containsValue( 99) );
-//      System.out.println( 200 + " est present: " + pfhash.containsValue(200) );
-//      System.out.println( 199 + " est present: " + pfhash.containsValue(199) );
-//      System.out.println( 300 + " est present: " + pfhash.containsValue(300) );
-//      System.out.println( 299 + " est present: " + pfhash.containsValue(299) );
-//      System.out.println();
-//      
-//
-//      System.out.println("La clé de 100 est : " + pfhash.getKey(100) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(100)) );
-//      System.out.println("La clé de 99 est : " + pfhash.getKey(99) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(99)) );
-//      System.out.println("La clé de 200 est : " + pfhash.getKey(200) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(200)) );
-//      System.out.println("La clé de 199 est : " + pfhash.getKey(199) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(199)) );
-//      System.out.println("La clé de 300 est : " + pfhash.getKey(300) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(300)) );
-//      System.out.println("La clé de 299 est : " + pfhash.getKey(299) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(299)) );
-//      System.out.println();
-//      
-//      System.out.println(pfhash);
-//      System.out.println();
+//       On cree un LinearSpacePerfectHashing et insere les memes donnees
+      System.out.println( "LinearSpacePerfectHashing:");
+      System.out.println();
+      
+      LinearSpacePerfectHashing<Integer> pfhash = new LinearSpacePerfectHashing<Integer>( al );
+      
+      // Verifie les proprietes d'occupation d'espace
+      System.out.println( "Number of elements: " + al.size() );
+      System.out.println( "Size: " + pfhash.Size() );
+      System.out.println();
+      
+      // Verifie qu'il fonctionne comme prevu
+      System.out.println( 100 + " est present: " + pfhash.containsValue(100) );
+      System.out.println(  99 + " est present: " + pfhash.containsValue( 99) );
+      System.out.println( 200 + " est present: " + pfhash.containsValue(200) );
+      System.out.println( 199 + " est present: " + pfhash.containsValue(199) );
+      System.out.println( 300 + " est present: " + pfhash.containsValue(300) );
+      System.out.println( 299 + " est present: " + pfhash.containsValue(299) );
+      System.out.println();
+      
+
+      System.out.println("La clé de 100 est : " + pfhash.getKey(100) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(100)) );
+      System.out.println("La clé de 99 est : " + pfhash.getKey(99) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(99)) );
+      System.out.println("La clé de 200 est : " + pfhash.getKey(200) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(200)) );
+      System.out.println("La clé de 199 est : " + pfhash.getKey(199) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(199)) );
+      System.out.println("La clé de 300 est : " + pfhash.getKey(300) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(300)) );
+      System.out.println("La clé de 299 est : " + pfhash.getKey(299) + ", elle est presente: " + pfhash.containsKey(pfhash.getKey(299)) );
+      System.out.println();
+      
+      System.out.println(pfhash);
+      System.out.println();
 //      
 //      
 //      /**
@@ -106,32 +106,32 @@ public class HashFunctions
    /**
     * Question 1
     */
-   public static ArrayList<Integer> randomIntegers(int length)
-   {
-	   ArrayList<Integer> array = new ArrayList<Integer>();
-	   boolean inIt = false;
-	   int i=0;
-	   
-	   do {
-		   inIt=false;
-		   //Random number between 0 and P
-		   int tmp = (int) (Math.random() * p);
-
-		   //Check if already in tab
-		   if(array.contains(tmp))
-				   inIt=true;
-
-		   //Put it if not and go to next case
-		   if(!inIt){
-			   array.add(tmp);
-			   i++;
-		   }
-		   
-	   }while(i!=length);
-	   
-	   return array;
-	   
-   }
+//   public static ArrayList<Integer> randomIntegers(int length)
+//   {
+//	   ArrayList<Integer> array = new ArrayList<Integer>();
+//	   boolean inIt = false;
+//	   int i=0;
+//	   
+//	   do {
+//		   inIt=false;
+//		   //Random number between 0 and P
+//		   int tmp = (int) (Math.random() * p);
+//
+//		   //Check if already in tab
+//		   if(array.contains(tmp))
+//				   inIt=true;
+//
+//		   //Put it if not and go to next case
+//		   if(!inIt){
+//			   array.add(tmp);
+//			   i++;
+//		   }
+//		   
+//	   }while(i!=length);
+//	   
+//	   return array;
+//	   
+//   }
 }
 
 

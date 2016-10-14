@@ -8,11 +8,16 @@ public class LinearSpacePerfectHashing<AnyType>
 	static int p = 46337;
 
 	QuadraticSpacePerfectHashing<AnyType>[] data;
-	int a, b;
+	int a;
+        int b;
+        int m;        
 
 	LinearSpacePerfectHashing()
 	{
-		a=b=0; data = null;
+		a = 0;
+                b = 0;
+                m = 0;
+                data = null;
 	}
 
 	LinearSpacePerfectHashing(ArrayList<AnyType> array)
@@ -30,20 +35,43 @@ public class LinearSpacePerfectHashing<AnyType>
 	{
 		Random generator = new Random( System.nanoTime() );
 
-		if(array == null || array.size() == 0)
+		if(array == null || array.isEmpty())
 		{
-			// A completer
+                        data = new QuadraticSpacePerfectHashing[0];
 			return;
 		}
 		if(array.size() == 1)
 		{
 			a = b = 0;
-
-			// A completer
+                        m = 1;
+                        data = new QuadraticSpacePerfectHashing[1];
+                        data[0] = new QuadraticSpacePerfectHashing<>(array);
 			return;
 		}
+                
+                ArrayList<AnyType> tempArray;
+                
+                a = (int) (Math.random() * p);                                               
+                b = (int) (Math.random() * p);
+                m = array.size();
+                
+                data = new QuadraticSpacePerfectHashing[m];
 
-		// A completer
+                
+                for (int i = 0; i < m; i++) {
+                        tempArray = new ArrayList<>();
+                        for (AnyType tempItem : array) {
+                                if (getKey(tempItem) == i){
+                                        tempArray.add(tempItem);
+                                }
+                        }
+                        if (tempArray.isEmpty()){
+                                data[i] = new QuadraticSpacePerfectHashing<>();
+                        }
+                        else{
+                                data[i] = new QuadraticSpacePerfectHashing<>(tempArray);
+                        }                        
+                }
 	}
 
 	public int Size()
@@ -60,32 +88,56 @@ public class LinearSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-		// A completer
-
+                if((key < m) && (key >= 0)){
+                        return data[key] != null;
+                }        
+                return false;
 	}
 	
 	public int getKey (AnyType x) {
-		// A completer
-		
+		return CustomHash(x);	
 	}
 	
 	public boolean containsValue (AnyType x) {
-		// A completer
-
+            int key = CustomHash(x);
+            
+            if ((key >= 0) && (key < m) && (data[key] != null)) {
+		return data[key].containsValue(x);                
+            }
+            return false;
 	}
 	
 	public void remove (AnyType x) {
-		// A completer
-		
+                int key = CustomHash(x);
+                
+                if ((key >= 0) && (key < m) && (data[key] != null)) {
+                        data[key].remove(x);                
+                }            		
 	}
 
+        @Override
 	public String toString () {
 		String result = "";
 		
-		// A completer
+                for (int i = 0; i < m; i++) {
+                        result += "[" + i + "] -> ";
+                        if (data[i] != null) {
+                            result += data[i].toString();
+                        }
+                        result += "\r\n";
+                }       
 		
 		
 		return result; 
 	}
-	
+	        
+        /** 
+         * This private function is duplicate from QuadraticSpacePerfectHashing
+         * Buts we don't want to be dependant from it and it should stay private
+         * for internal behaviour.
+         */
+        private int CustomHash(AnyType object){
+            return  ((a * object.hashCode() + b) % p) % m;
+        }
+                
 }
