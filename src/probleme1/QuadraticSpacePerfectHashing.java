@@ -43,7 +43,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                 if(items == null){
                     return false;
                 }
-                
+                //Check if there is really en eleent at the key index
                 if(items[key] != null){
                         return true;
                 }
@@ -54,7 +54,8 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	{
 		if((items == null) || (m == 0) ){
                     return false;
-                }     
+                }    
+		//Call to check value in the case h(x) 
                 return items[CustomHash(x)] != null;
 	}
 
@@ -62,7 +63,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                 if(items == null){
                         return;
                 }
-            
+            	//Look for the element at the case h(x) if found remove it
 		int tmp = CustomHash(x);
 		if( items[tmp] == x){
                         items[tmp] = null;
@@ -73,7 +74,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
 
 	public int getKey (AnyType x) {
-                //TODO:refacto with private method
+                // h(x)= (a*x+b)%m
 		return ((a * x.hashCode() + b) % p) % m;
 	}
 
@@ -97,6 +98,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		}
 
 		do
+		//Increse size of tab, copy old tab
 		{
                         a = (int) (Math.random() * p);                                               
                         b = (int) (Math.random() * p);
@@ -118,7 +120,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
                 int tmp1;
                 int tmp2;
                 
-                // On compare chaque item avec chaque autre item une fois O(nLog(n))
+                // OComparre each item with each other item 1 time --> O(nLog(n))
                 for (int i = 0; i < array.size() - 1; i++) {                           
                         tmp1 = CustomHash(array.get(i));
                         for (int j = i + 1; j < array.size(); j++) {
@@ -151,6 +153,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
         
         private int CustomHash(AnyType object){
+		//h(x)=(ax+b)%m
                 return ((a * object.hashCode() + b) % p) % m;
         }
 }
