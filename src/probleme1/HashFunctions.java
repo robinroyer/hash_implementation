@@ -88,50 +88,50 @@ public class HashFunctions
       
       System.out.println(pfhash);
       System.out.println();
-//      
-//      
-//      /**
-//       * Confirmation des resultats de Exercice 2
-//       */
-//      // Effectues quelques tests aleatoires pour verifier les proprietes de taille
-//      pfhash = new LinearSpacePerfectHashing<Integer>();
-//            
-//      for(int i=0, nbElements = 10; i<40; ++i, nbElements += 10)
-//      {
-//         pfhash.SetArray( randomIntegers( nbElements ) );
-//         System.out.println( nbElements + "\t" + pfhash.Size() );
-//      }
+      
+      
+      /**
+       * Confirmation des resultats de Exercice 2
+       */
+      // Effectues quelques tests aleatoires pour verifier les proprietes de taille
+      pfhash = new LinearSpacePerfectHashing<Integer>();
+            
+      for(int i=0, nbElements = 10; i<40; ++i, nbElements += 10)
+      {
+         pfhash.SetArray( randomIntegers( nbElements ) );
+         System.out.println( nbElements + "\t" + pfhash.Size() );
+      }
    }
    
    /**
     * Question 1
     */
-//   public static ArrayList<Integer> randomIntegers(int length)
-//   {
-//	   ArrayList<Integer> array = new ArrayList<Integer>();
-//	   boolean inIt = false;
-//	   int i=0;
-//	   
-//	   do {
-//		   inIt=false;
-//		   //Random number between 0 and P
-//		   int tmp = (int) (Math.random() * p);
-//
-//		   //Check if already in tab
-//		   if(array.contains(tmp))
-//				   inIt=true;
-//
-//		   //Put it if not and go to next case
-//		   if(!inIt){
-//			   array.add(tmp);
-//			   i++;
-//		   }
-//		   
-//	   }while(i!=length);
-//	   
-//	   return array;
-//	   
-//   }
+   public static ArrayList<Integer> randomIntegers(int length)
+   {
+	   ArrayList<Integer> array = new ArrayList<Integer>();
+	   boolean inIt = false;
+	   int i=0;
+	   
+	   do {
+		   inIt=false;
+		   //Random number between 0 and P
+		   int tmp = (int) (Math.random() * p);
+
+		   //Check if already in tab
+		   if(array.contains(tmp))
+				   inIt=true;
+
+		   //Put it if not and go to next case
+		   if(!inIt){
+			   array.add(tmp);
+			   i++;
+		   }
+		   
+	   }while(i!=length);
+	   
+	   return array;
+	   
+   }
 }
 
 
