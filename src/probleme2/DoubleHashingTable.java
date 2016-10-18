@@ -161,6 +161,7 @@ public class DoubleHashingTable<AnyType>
     * Internal method to find a prime number at least as large as n.
     * @param n the starting number (must be positive).
     * @return a prime number larger than or equal to n.
+    * @author Mark Allen Weiss
     */
    private static int nextPrime( int n )
    {
@@ -181,6 +182,7 @@ public class DoubleHashingTable<AnyType>
     * Not an efficient algorithm.
     * @param n the number to test.
     * @return the result of the test.
+    * @author Mark Allen Weiss
     */
    private static boolean isPrime( int n )
    {
