@@ -34,7 +34,8 @@ public class LinearSpacePerfectHashing<AnyType>
 	private void AllocateMemory(ArrayList<AnyType> array)
 	{
 		Random generator = new Random( System.nanoTime() );
-
+		
+		//Create new hashing table
 		if(array == null || array.isEmpty())
 		{
                         data = new QuadraticSpacePerfectHashing[0];
@@ -51,13 +52,14 @@ public class LinearSpacePerfectHashing<AnyType>
                 
                 ArrayList<AnyType> tempArray;
                 
+		//Random nb between 0 and P
                 a = (int) (Math.random() * p);                                               
                 b = (int) (Math.random() * p);
                 m = array.size();
                 
                 data = new QuadraticSpacePerfectHashing[m];
 
-                
+                //Copy ofprevious elements in the new tab
                 for (int i = 0; i < m; i++) {
                         tempArray = new ArrayList<>();
                         for (AnyType tempItem : array) {
@@ -79,6 +81,7 @@ public class LinearSpacePerfectHashing<AnyType>
 		if( data == null ) return 0;
 
 		int size = 0;
+		//!return true size = nb of element in tab
 		for(int i=0; i<data.length; ++i)
 		{
 			size += (data[i] == null ? 1 : data[i].Size());
@@ -88,6 +91,7 @@ public class LinearSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
+		//Checkif a element is here at the case key
                 if((key < m) && (key >= 0)){
                         return data[key].Size() != 0;
                 }        
@@ -100,7 +104,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	
 	public boolean containsValue (AnyType x) {
             int key = CustomHash(x);
-            
+            //Check if the element at the case x is not null
             if ((key >= 0) && (key < m) && (data[key].Size() != 0)) {
 		return data[key].containsValue(x);                
             }
@@ -109,7 +113,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	
 	public void remove (AnyType x) {
                 int key = CustomHash(x);
-                
+                //If key correct and if a the key index there is en element, we romve it
                 if ((key >= 0) && (key < m) && (data[key] != null)) {
                         data[key].remove(x);                
                 }            		
@@ -137,6 +141,7 @@ public class LinearSpacePerfectHashing<AnyType>
          * for internal behaviour.
          */
         private int CustomHash(AnyType object){
+	//Hash h(x) = (ax+b)%m
             return  ((a * object.hashCode() + b) % p) % m;
         }
                 
