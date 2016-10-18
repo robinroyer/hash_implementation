@@ -96,7 +96,7 @@ public class DoubleHashingTable<AnyType>
                     break;
                 }
             }
-            while(x.equals(items[hash]));
+            while(!x.equals(items[hash]));
             return items[hash];
 	}
         /**
